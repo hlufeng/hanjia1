@@ -1,2 +1,2 @@
-include ':app', ':ex31', ':ex32', ':ex33', ':ex34'
+include ':app', ':ex31', ':ex32', ':ex33', ':ex34', ':ex35', ':ex36', ':ex37', ':ex38', ':ex39'
 rootProject.name='hanjia1'
