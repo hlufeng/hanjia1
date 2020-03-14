@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">授权界面</string>
+    <string name="tx">登陆后该应用将获得以下权限</string>
+    <string name="cb1">获得你的公开信息（昵称、头像等）</string>
+    <string name="cb2">寻找与你共同使用该应用的好友</string>
+    <string name="cb3">帮助你通过该应用向好友发送消息</string>
+    <string name="bt1">确认登录</string>
+    <string name="bt2">取消</string>
+</resources>
