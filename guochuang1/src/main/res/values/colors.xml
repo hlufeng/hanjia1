@@ -7,5 +7,8 @@
     <color name="grey">#F5F5F5</color>
     <color name="black">#000000</color>
     <color name="qblack">#504B4B</color>
-    <color name="mo">#8a000000</color>
+    <color name="blue">#1296db</color>
+    <color name="orange">#ff690a</color>
+    <color name="yellow">#ffce58</color>
+    <color name="main_tab_text_color">#000000</color>
 </resources>

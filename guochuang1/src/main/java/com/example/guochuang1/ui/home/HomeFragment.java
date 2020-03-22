@@ -1,6 +1,7 @@
 package com.example.guochuang1.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
-import com.example.guochuang1.MainActivity;
+import com.example.guochuang1.FoodActivity;
 import com.example.guochuang1.R;
+import com.example.guochuang1.ServerActivity;
+import com.example.guochuang1.SetActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -59,7 +62,31 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.set).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "维护中", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), SetActivity.class);
+                getActivity().startActivity(intent);
+                //Toast.makeText(getActivity(), "维护中", Toast.LENGTH_SHORT).show();
+            }
+        });root.findViewById(R.id.food).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), FoodActivity.class);
+                getActivity().startActivity(intent);
+                //Toast.makeText(getActivity(), "维护中", Toast.LENGTH_SHORT).show();
+            }
+        });root.findViewById(R.id.book).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "暂未开放", Toast.LENGTH_SHORT).show();
+            }
+        });root.findViewById(R.id.server).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), ServerActivity.class);
+                getActivity().startActivity(intent);
+                //Toast.makeText(getActivity(), "维护中", Toast.LENGTH_SHORT).show();
             }
         });
         return root;
@@ -74,14 +101,14 @@ public class HomeFragment extends Fragment {
     private void initBanner() {
         imageUrlData = new ArrayList<>();
         contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.studyingroom);
-        imageUrlData.add(R.drawable.desk);
-        imageUrlData.add(R.drawable.studyingroom);
-        imageUrlData.add(R.drawable.desk);
-        contentData.add("我是雷神");
-        contentData.add("我是小美");
-        contentData.add("我是洛基");
-        contentData.add("我是博士");
+        imageUrlData.add(R.drawable.ban_main1);
+        imageUrlData.add(R.drawable.ban_main2);
+        imageUrlData.add(R.drawable.ban_main3);
+        imageUrlData.add(R.drawable.ban_main4);
+        contentData.add("店面");
+        contentData.add("座位");
+        contentData.add("留言板");
+        contentData.add("窗景");
         myBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         myBanner.setImageLoader(new MyLoader());
         myBanner.setImages(imageUrlData);
@@ -103,4 +130,6 @@ public class HomeFragment extends Fragment {
             Glide.with(getActivity()).load(path).into(imageView);
         }
     }
+
+
 }

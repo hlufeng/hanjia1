@@ -6,15 +6,16 @@
 
     <ImageButton
         android:id="@+id/ib_title_back"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:background="@null"
-        android:src="@drawable/back"/>
+        android:src="@drawable/ic_back"/>
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -31,5 +32,5 @@
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:src="@drawable/user"/>
+        android:src="@drawable/ic_user"/>
 </RelativeLayout>

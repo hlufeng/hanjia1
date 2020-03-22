@@ -22,6 +22,8 @@
         <item name="android:layout_width">120sp</item>
         <item name="android:layout_height">80sp</item>
         <item name="android:layout_columnWeight">1</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginBottom">10sp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
@@ -31,4 +33,34 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="food_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">10sp</item>
+        <item name="android:paddingHorizontal">30sp</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_marginTop">15sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="man_note">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">23sp</item>
+        <item name="android:paddingHorizontal">15sp</item>
+        <item name="android:layout_marginTop">15sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

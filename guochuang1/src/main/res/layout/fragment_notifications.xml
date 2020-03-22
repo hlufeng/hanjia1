@@ -1,22 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60sp"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/man_bc"
+            tools:context=".ui.notifications.NotificationsFragment">
+
+            <TextView
+                android:id="@+id/set_state"
+                android:layout_width="142dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="24dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="80dp"
+                android:drawableRight="@drawable/ic_chair"
+                android:text="座位状态"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/guanggao"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/frame"
+                android:lineSpacingExtra="10dp"
+                android:padding="10sp"
+                android:text="即来即坐，全部商品9折，包月服务限时抢购 只需198元"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/set_state" />
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:drawableRight="@drawable/ic_man"
+                android:text="个人管理"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="@+id/title1"
+                app:layout_constraintTop_toBottomOf="@+id/guanggao" />
+
+            <TextView
+                android:id="@+id/tv1"
+                style="@style/man_note"
+                android:background="@drawable/note"
+                android:drawableTop="@drawable/ic_task"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="任务进行"
+                app:layout_constraintEnd_toStartOf="@+id/tv2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/man_note"
+                android:background="@drawable/note"
+                android:drawableTop="@drawable/ic_his_order"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="历史订单"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv1"
+                app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+            <TextView
+                android:id="@+id/tv3"
+                style="@style/man_note"
+                android:background="@drawable/note"
+                android:drawableTop="@drawable/ic_more"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="更多管理"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv2"
+                app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+            <TextView
+                android:id="@+id/title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:drawableRight="@drawable/ic_shalou"
+                android:text="独处时间"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="@+id/title2"
+                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="15sp"
+                android:text="0分钟"
+                android:textColor="#1296db"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title3" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30sp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>

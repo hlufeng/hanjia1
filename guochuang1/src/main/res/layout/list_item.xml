@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="10sp"
+    android:paddingVertical="20sp">
+
+    <ImageView
+        android:id="@+id/item_pic"
+        android:layout_width="150sp"
+        android:layout_height="100sp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/item_pic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textColor="@color/orange"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/item_pic"
+        app:layout_constraintTop_toBottomOf="@+id/item_title" />
+
+    <ImageView
+        android:id="@+id/item_trc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/ic_frc"
+        app:layout_constraintBottom_toBottomOf="@id/item_price"
+        app:layout_constraintEnd_toStartOf="@+id/item_num"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_num"
+        android:layout_width="20dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="76dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@id/item_price"
+        app:layout_constraintEnd_toStartOf="@+id/item_plus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_trc"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/item_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_num"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
