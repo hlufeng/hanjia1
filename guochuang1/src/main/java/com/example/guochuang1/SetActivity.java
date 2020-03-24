@@ -21,8 +21,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class SetActivity extends AppCompatActivity {
     private final String TAG = "SetActivity";
@@ -145,7 +147,7 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.i(TAG, "onCheckedChanged: checkedId:" + checkedId);
-                switch (checkedId) {
+                switch (checkedId%3) {
                     case 1:
                         setOrder.setType("A");
                         price = 3;
@@ -154,7 +156,7 @@ public class SetActivity extends AppCompatActivity {
                         setOrder.setType("B");
                         price = 5;
                         break;
-                    case 3:
+                    case 0:
                         setOrder.setType("C");
                         price = 10;
                         break;
@@ -184,29 +186,35 @@ public class SetActivity extends AppCompatActivity {
                     } else {
                         if (time * price == 0) {
                             Toast.makeText(SetActivity.this, "请选择座位", Toast.LENGTH_SHORT).show();
-                        } else {
+                        }
+                        else if(checkTime(sdf.parse(s))){
+                            Toast.makeText(SetActivity.this, "该时间段您已预订过座位！", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                             setOrder.setOrder_time(sdf.format(d));
                             setOrder.setStart_time(sdf.format(date_start));
                             setOrder.setDuring_time(time);
                             setOrder.setCheck_time("");
-                            setOrder.setMoney(time*price);
+                            setOrder.setMoney(time * price);
                             setOrder.setState(0);
-                            setOrder.setContent((int)(Math.random()*30)+1);
-                            Log.i(TAG, "onClick: setOrder:"+setOrder.show());
+                            setOrder.setContent((int) (Math.random() * 30) + 1);
+                            Log.i(TAG, "onClick: setOrder:" + setOrder.show());
                             new AlertDialog.Builder(SetActivity.this)
                                     .setTitle("订单支付")
-                                    .setMessage("是否支付"+time*price+"元")
+                                    .setMessage("是否支付" + time * price + "元")
                                     .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(SetActivity.this,"支付成功！",Toast.LENGTH_SHORT).show();
+                                            DBManger_Set dbManger_set = new DBManger_Set(SetActivity.this);
+                                            dbManger_set.add(setOrder);
+                                            Toast.makeText(SetActivity.this, "支付成功！", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent();
                                             intent.setClass(SetActivity.this, MainActivity.class);
                                             intent.putExtra("id", 3);
                                             startActivity(intent);
                                         }
                                     })
-                                    .setNegativeButton("取消",null).show();
+                                    .setNegativeButton("取消", null).show();
                         }
                     }
                 } catch (Exception e) {
@@ -214,6 +222,40 @@ public class SetActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public boolean checkTime(Date date) throws Exception {
+        boolean ret = false;//默认false表示时间不冲突
+        DBManger_Set dbManger_set = new DBManger_Set(SetActivity.this);
+        ArrayList<HashMap<String, Object>> timeList=null;
+        try {
+            timeList = dbManger_set.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+        if (timeList==null){
+            Log.i(TAG, "checkTime: 座位订单数据为空");
+        }
+        else {
+            for (int i = 0; i < timeList.size(); i++) {
+                HashMap<String, Object> map = timeList.get(i);
+                Date date0 = sdf.parse(map.get("start_time").toString());
+                //计算结束时间
+                int dd = Integer.valueOf(map.get("during_time").toString());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date0);
+                calendar.add(Calendar.HOUR, dd);
+                Date date1 = calendar.getTime();
+                Log.i(TAG, "checkTime: ret:" + (date.after(date0) && date.before(date1)));
+                //比较时间
+                if (date.after(date0) && date.before(date1)) {
+                    ret = true;
+                    break;
+                }
+            }
+        }
+        return ret;
     }
 
 }

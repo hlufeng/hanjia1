@@ -2,16 +2,20 @@ package com.example.guochuang1.ui.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,16 +25,24 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.guochuang1.DBManger_Car;
+import com.example.guochuang1.DBManger_Set;
+import com.example.guochuang1.DB_Manger_food;
+import com.example.guochuang1.FoodOrder;
 import com.example.guochuang1.Items;
+import com.example.guochuang1.MainActivity;
 import com.example.guochuang1.MyAdapter;
 import com.example.guochuang1.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
+    private final String TAG = "gouwucheActiviy";
     private DashboardViewModel dashboardViewModel;
     int total_price;
     List<Items> shoppingcar;
@@ -39,6 +51,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private SimpleAdapter listItemAdapter; // 适配器
     ListView listView;
     TextView bottom_tv2;
+    Button pay;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -128,6 +141,61 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         TextView tv_title = getActivity().findViewById(R.id.tv_title);
         tv_title.setText("购物车");
         tv_title.setGravity(Gravity.CENTER);
+        //结算
+        pay = root.findViewById(R.id.car_bottom_check);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (total_price == 0) {
+                    Toast.makeText(getActivity(),"购物车为空",Toast.LENGTH_SHORT).show();
+                }else {
+                    try {
+                        if (checkTime(new Date())) {
+                            //生效中
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("订单支付")
+                                    .setMessage("一共" + total_price + "元，是否支付")
+                                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //载入数据库
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+                                            DB_Manger_food db_manger_food = new DB_Manger_food(getActivity());
+                                            FoodOrder foodOrder = new FoodOrder();
+                                            foodOrder.setOrder_time(sdf.format(new Date()));
+                                            foodOrder.setMoney(total_price);
+                                            String str = "";
+                                            for (HashMap<String, Object> map : listItem) {
+                                                str += map.get("name").toString() + ":" + map.get("num").toString() + "个;\n";
+                                            }
+                                            foodOrder.setContent(str);
+                                            db_manger_food.add(foodOrder);
+                                            //删除购物车数据
+                                            total_price=0;
+                                            listItem=new ArrayList<>();
+                                            DBManger_Car dbManger_car1 = new DBManger_Car(getActivity());
+                                            dbManger_car1.deleteAll();
+                                            listItemAdapter.notifyDataSetChanged();
+
+                                            Toast.makeText(getActivity(), "支付成功！", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent();
+                                            intent.setClass(getActivity(), MainActivity.class);
+                                            intent.putExtra("id", 3);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .setNegativeButton("取消", null).show();
+                        } else {
+                            Toast.makeText(getActivity(), "堂食需要在座位生效期间才能下单", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
         return root;
     }
 
@@ -183,5 +251,39 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 bottom_tv2.setText("￥" + total_price);
                 break;
         }
+    }
+
+    public boolean checkTime(Date date) throws Exception {
+        boolean ret = false;//默认false表示时间不冲突
+        DBManger_Set dbManger_set = new DBManger_Set(getActivity());
+        ArrayList<HashMap<String, Object>> timeList=null;
+        try {
+            timeList = dbManger_set.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+        if (timeList==null){
+            Log.i(TAG, "checkTime: 座位订单数据为空");
+        }
+        else {
+            for (int i = 0; i < timeList.size(); i++) {
+                HashMap<String, Object> map = timeList.get(i);
+                Date date0 = sdf.parse(map.get("start_time").toString());
+                //计算结束时间
+                int dd = Integer.valueOf(map.get("during_time").toString());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date0);
+                calendar.add(Calendar.HOUR, dd);
+                Date date1 = calendar.getTime();
+                Log.i(TAG, "checkTime: ret:" + (date.after(date0) && date.before(date1)));
+                //比较时间
+                if (date.after(date0) && date.before(date1)) {
+                    ret = true;
+                    break;
+                }
+            }
+        }
+        return ret;
     }
 }

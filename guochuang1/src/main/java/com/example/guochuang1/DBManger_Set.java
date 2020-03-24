@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DBManger_Set {
@@ -117,5 +118,23 @@ public class DBManger_Set {
         }
         db.close();
         return setOrder;
+    }
+
+    public ArrayList<HashMap<String, Object>> getTime() {
+        ArrayList<HashMap<String, Object>> itemList = null;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(TBNAME, null, null, null, null, null, null);
+        if (cursor != null) {
+            itemList = new ArrayList<HashMap<String, Object>>();
+            while (cursor.moveToNext()) {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("start_time",cursor.getString(cursor.getColumnIndex("START_TIME")));
+                map.put("during_time",cursor.getString(cursor.getColumnIndex("DURING_TIME")));
+                itemList.add(map);
+            }
+            cursor.close();
+        }
+        db.close();
+        return itemList;
     }
 }

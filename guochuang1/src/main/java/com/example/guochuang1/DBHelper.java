@@ -9,6 +9,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "kezi.db";
     public static final String TB_NAME = "shoppingCar";
     public static final String TB_NAME2 = "setOrder";
+    public static final String TB_NAME3 = "foodOrder";
+    public static final String TB_NAME4 = "note";
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -21,7 +23,9 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TB_NAME + "(PIC INTEGER PRIMARY KEY,NAME TEXT,PRICE INTEGER,NUM INTEGER)");
-        db.execSQL("CREATE TABLE " + TB_NAME2 + "(ORDER_TIME TEXT PRIMARY KEY,START_TIME TEXT,DURING_TIME INTEGER,CHECK_TIME TEXT,MONEY INTEGER ,STATE INTEGER,TYPE TEXT,CONTENT INTEGER)");
+        db.execSQL("CREATE TABLE " + TB_NAME2 + "(ORDER_TIME TEXT PRIMARY KEY,START_TIME TEXT,DURING_TIME INTEGER,CHECK_TIME TEXT,MONEY INTEGER,STATE INTEGER,TYPE TEXT,CONTENT INTEGER)");
+        db.execSQL("CREATE TABLE " + TB_NAME3 + "(ORDER_TIME TEXT PRIMARY KEY,CONTENT TEXT,MONEY INTEGER)");
+        db.execSQL("CREATE TABLE " + TB_NAME4 + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,TIME TEXT,CONTENT,TEXT)");
     }
 
     @Override

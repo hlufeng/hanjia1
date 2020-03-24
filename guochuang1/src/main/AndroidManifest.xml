@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderListActivity"></activity>
+        <activity android:name=".NoteInfoActivity"></activity>
+        <activity android:name=".NoteListActivity" />
+        <activity android:name=".MyManager" />
+        <activity android:name=".OrderListActivity" />
         <activity android:name=".ServerInfoActivity" />
         <activity android:name=".FoodListActivity" />
         <activity
