@@ -48,6 +48,7 @@
                 android:background="@drawable/frame"
                 android:drawableTop="@drawable/ic_print"
                 android:text="打印服务"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/server_tv2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/server_tit" />
@@ -68,6 +69,7 @@
                 android:background="@drawable/frame"
                 android:drawableTop="@drawable/ic_charge"
                 android:text="充电服务"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/server_tv2"
                 app:layout_constraintTop_toBottomOf="@id/server_tit" />
@@ -88,8 +90,9 @@
                 android:background="@drawable/frame"
                 android:drawableTop="@drawable/xiaoke"
                 android:text="小壳出品"
+                android:textSize="14sp"
                 android:paddingVertical="10sp"
-                android:paddingHorizontal="25sp"
+                android:paddingHorizontal="20sp"
                 app:layout_constraintStart_toStartOf="@+id/server_tv2"
                 app:layout_constraintTop_toBottomOf="@+id/server_tv2" />
 

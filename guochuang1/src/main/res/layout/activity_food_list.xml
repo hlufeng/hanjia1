@@ -59,6 +59,7 @@ android:background="@color/white">
     android:background="@drawable/frame1"
     android:layout_marginHorizontal="10sp"
     android:text="加入购物车"
+    android:textSize="14dp"
     android:textColor="@color/white"/>
 </RelativeLayout>
 

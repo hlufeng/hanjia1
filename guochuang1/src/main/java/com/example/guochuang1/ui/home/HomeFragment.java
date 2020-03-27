@@ -3,6 +3,7 @@ package com.example.guochuang1.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.guochuang1.FoodActivity;
 import com.example.guochuang1.MoreActivity;
 import com.example.guochuang1.R;
+import com.example.guochuang1.RoundAngleImageView;
 import com.example.guochuang1.ServerActivity;
 import com.example.guochuang1.SetActivity;
 import com.youth.banner.Banner;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
     Banner myBanner;
     List<Integer> imageUrlData;
     List<String> contentData;
+    RoundAngleImageView img1,img2,img3,img4,img5,img6,img7,img8,img9;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -98,6 +101,49 @@ public class HomeFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+        //适配imageview宽度
+        DisplayMetrics metric = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;     // 屏幕宽度（像素）
+        int height = metric.heightPixels;   // 屏幕高度（像素）
+        img1 = (RoundAngleImageView) root.findViewById(R.id.mian_img1);
+        img2 = (RoundAngleImageView) root.findViewById(R.id.mian_img2);
+        img3 = (RoundAngleImageView) root.findViewById(R.id.mian_img3);
+        img4 = (RoundAngleImageView) root.findViewById(R.id.mian_img4);
+        img5 = (RoundAngleImageView) root.findViewById(R.id.mian_img5);
+        img6 = (RoundAngleImageView) root.findViewById(R.id.mian_img6);
+        img7 = (RoundAngleImageView) root.findViewById(R.id.mian_img7);
+        img8 = (RoundAngleImageView) root.findViewById(R.id.mian_img8);
+        img9 = (RoundAngleImageView) root.findViewById(R.id.mian_img9);
+        ViewGroup.LayoutParams lp = img1.getLayoutParams();
+        ViewGroup.LayoutParams lp2 = img2.getLayoutParams();
+        ViewGroup.LayoutParams lp3 = img3.getLayoutParams();
+        ViewGroup.LayoutParams lp4 = img4.getLayoutParams();
+        ViewGroup.LayoutParams lp5 = img5.getLayoutParams();
+        ViewGroup.LayoutParams lp6 = img6.getLayoutParams();
+        ViewGroup.LayoutParams lp7 = img7.getLayoutParams();
+        ViewGroup.LayoutParams lp8 = img8.getLayoutParams();
+        ViewGroup.LayoutParams lp9 = img9.getLayoutParams();
+        lp.width=width/3-60;
+        lp2.width=width/3-60;
+        lp3.width=width/3-60;
+        lp4.width=width/3-60;
+        lp5.width=width/3-60;
+        lp6.width=width/3-60;
+        lp7.width=width/3-60;
+        lp8.width=width/3-60;
+        lp9.width=width/3-60;
+        img1.setLayoutParams(lp);
+        img2.setLayoutParams(lp2);
+        img3.setLayoutParams(lp3);
+        img4.setLayoutParams(lp4);
+        img5.setLayoutParams(lp5);
+        img6.setLayoutParams(lp6);
+        img7.setLayoutParams(lp7);
+        img8.setLayoutParams(lp8);
+        img9.setLayoutParams(lp9);
+
+
         return root;
     }
 

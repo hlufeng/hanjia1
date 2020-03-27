@@ -81,6 +81,7 @@
                 android:drawableTop="@drawable/ic_icream"
                 android:background="@drawable/frame"
                 android:text="冰淇淋"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/food_tv2"
                 app:layout_constraintTop_toBottomOf="@id/food_tit" />
