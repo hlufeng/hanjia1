@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.example.guochuang1.FoodActivity;
+import com.example.guochuang1.MoreActivity;
 import com.example.guochuang1.R;
 import com.example.guochuang1.ServerActivity;
 import com.example.guochuang1.SetActivity;
@@ -87,6 +88,14 @@ public class HomeFragment extends Fragment {
                 intent.setClass(getActivity(), ServerActivity.class);
                 getActivity().startActivity(intent);
                 //Toast.makeText(getActivity(), "维护中", Toast.LENGTH_SHORT).show();
+            }
+        });
+        root.findViewById(R.id.main_more).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), MoreActivity.class);
+                getActivity().startActivity(intent);
             }
         });
         return root;

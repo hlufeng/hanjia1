@@ -162,7 +162,11 @@ public class NotificationsFragment extends Fragment {
         long hm = 0;
         for (SetOrder setOrder : list) {
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
+            try {
+                calendar.setTime(sdf2.parse(setOrder.getStart_time()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             calendar.add(Calendar.HOUR, setOrder.getDuring_time());
             Date date1 = calendar.getTime();
             Date date = new Date();

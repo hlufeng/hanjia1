@@ -40,7 +40,11 @@ public class OrderFragment1 extends Fragment {
             //状态的确定
             String state="";
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
+            try {
+                calendar.setTime(sdf.parse(setOrder.getStart_time()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             calendar.add(Calendar.HOUR, setOrder.getDuring_time());
             Date date1 = calendar.getTime();
             Date date = new Date();
@@ -51,7 +55,7 @@ public class OrderFragment1 extends Fragment {
                 e.printStackTrace();
             }
             if(date1.before(date)){
-                state="已过期";
+                state="已失效";
             }else {
                 try {
                     if(date0.after(date)){
